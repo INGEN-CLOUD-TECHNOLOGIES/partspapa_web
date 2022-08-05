@@ -14,6 +14,7 @@ const state = {
     brands: [],
     categories: [],
     parts:[],
+    latest_products: [],
 }
 
 const mutations = {
@@ -25,6 +26,12 @@ const mutations = {
     },
     GET_PARTS(state, parts) {
         state.parts = parts;
+    },
+    GET_PRODUCTS(state, products) {
+        state.products = products;
+    },
+    GET_LATEST_PRODUCTS(state, latest_products) {
+        state.latest_products = latest_products;
     }
 }
 
@@ -43,12 +50,21 @@ const actions = {
         }).catch(err => {
             console.log(err);
         });
+    },
+
+    getLatestProducts({ commit }) {
+        getAPI('/api/products/latest').then(res => {
+            commit('GET_LATEST_PRODUCTS', res.data);
+        }).catch(err => {
+            console.log(err);
+        });
     }
 }
 
 const getters = {
     getBrands: state => state.brands,
     getParts: state => state.parts,
+    getLatestProducts: state => state.latest_products,
 }
 
 

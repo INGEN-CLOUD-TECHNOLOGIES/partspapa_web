@@ -7,7 +7,7 @@
       <div class="flex menu my-auto flex-initial ml-5">
         <img src="@/assets/img/menu.svg" class="h-10" alt=""><span class="ml-2 text-sm text-white my-auto">Menu</span>
       </div>
-      <div class="search-bar flex flex-initial my-auto">
+      <div class="search-bar md:flex flex-initial my-auto hidden">
         <input
           type="text"
           placeholder="Search for products"
@@ -25,14 +25,14 @@
                 </div>
             </div>
           </li>
-          <li class="item my-auto relative w-9">
+          <!-- <li class="item my-auto relative w-9">
             <img class="h-12" src="@/assets/img/shopping-bag.svg" alt="">
             <span class="count font-bold text-xs bg-info">1</span>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
-    <div class="layer-2 bg-secondary-dark flex text-white">
+    <div class="layer-2 bg-secondary-dark md:flex text-white hidden">
         <div class="context">
             <ul class="flex">
                 <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Top Deals</li>

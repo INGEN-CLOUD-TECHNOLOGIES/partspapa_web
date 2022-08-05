@@ -51,7 +51,7 @@
           <h1 class="name mb-6">CONTACT</h1>
           <ul>
             <li>Accra, Abbosey Okai 1</li>
-            <li>info@example.com</li>
+            <!-- <li>info@example.com</li> -->
             <li>+233 561 344 543</li>
             <li>+234 337 425 778</li>
           </ul>

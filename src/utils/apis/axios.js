@@ -10,8 +10,8 @@ import LocalStorageService from "./token";
 // const nprogress = new NProgress()
 
 // const baseURL = process.env.VUE_APP_ROOT_API;
-const baseURL = 'http://127.0.0.1:9000';
-// const baseURL = 'https://partspapa.herokuapp.com';
+// const baseURL = 'http://127.0.0.1:9000';
+const baseURL = 'https://partspapa.herokuapp.com';
 
 const getAPI = axios.create({
     baseURL: baseURL,
