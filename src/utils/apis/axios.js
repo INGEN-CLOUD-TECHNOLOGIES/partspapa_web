@@ -11,11 +11,12 @@ import LocalStorageService from "./token";
 
 // const baseURL = process.env.VUE_APP_ROOT_API;
 // const baseURL = 'http://127.0.0.1:9000';
-const baseURL = 'https://partspapa.herokuapp.com';
+
+const baseURL = process.env.VUE_APP_ROOT_API;
 
 const getAPI = axios.create({
     baseURL: baseURL,
-    timeout: 9000000,
+    timeout: 9000,
 })
 
 export { getAPI }

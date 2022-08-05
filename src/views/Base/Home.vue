@@ -124,8 +124,8 @@
     </div>
 
     <!-- brands section -->
-    <div class="section">
-      <div class="border-b header-title container">
+    <div class="section md:container sm:container">
+      <div class="border-b header-title">
         <h1
           class="
             title
