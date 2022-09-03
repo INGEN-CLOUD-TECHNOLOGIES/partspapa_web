@@ -1,15 +1,36 @@
 <template>
   <div class="home">
-    <Navbar />
     <!-- mobile bar -->
     <MobileBar />
     <!-- // hero section -->
     <div class="hero-banner relative hidden md:block">
-        <div class="overlay"></div>
-        <div class="banner-content w-1/2 pl-16 pr-32 text-left flex flex-col h-full place-content-center text-white z-10 absolute">
-            <div class="caption font-headers text-lg font-semibold mb-10">Everything you need to sell online. Trusted by millions of businesses worldwide.</div>
-            <router-link to="/register" tag='div' class="btn bg-info rounded px-4 py-2 w-32 text-black cursor-pointer">Start Selling</router-link>
+      <div class="overlay"></div>
+      <div
+        class="
+          banner-content
+          w-1/2
+          pl-16
+          pr-32
+          text-left
+          flex flex-col
+          h-full
+          place-content-center
+          text-white
+          z-10
+          absolute
+        "
+      >
+        <div class="caption font-headers text-lg font-semibold mb-10">
+          Everything you need to sell online. Trusted by millions of businesses
+          worldwide.
         </div>
+        <router-link
+          to="/register"
+          tag="div"
+          class="btn bg-info rounded px-4 py-2 w-32 text-black cursor-pointer"
+          >Start Selling</router-link
+        >
+      </div>
     </div>
 
     <!-- // category section -->
@@ -25,8 +46,7 @@
             place-content-center
             content-center
             py-1
-            md:py-3 
-            md:h-72
+            md:py-3 md:h-72
           "
         >
           <img
@@ -40,7 +60,19 @@
           <p class="title center text-black font-bold text-sm">
             Choose Vehicle to find the exact parts
           </p>
-          <form action="" class="py-5 block md:flex justify-between px-10 form-group max-w-3xl gap-4">
+          <form
+            action=""
+            class="
+              py-5
+              block
+              md:flex
+              justify-between
+              px-10
+              form-group
+              max-w-3xl
+              gap-4
+            "
+          >
             <select name="Car Make" class="md:w-full mb-20" id="make">
               <option value="">Select Make</option>
               <option v-for="brand in brands" :value="brand.id" :key="brand.id">
@@ -61,7 +93,11 @@
               <option value="2012">2012</option>
             </select>
             <div class="h-5 md:hidden"></div>
-            <select name="Model" id="model" class="cursor-not-allowed md:w-full my-6"></select>
+            <select
+              name="Model"
+              id="model"
+              class="cursor-not-allowed md:w-full my-6"
+            ></select>
           </form>
         </div>
       </div>
@@ -111,12 +147,14 @@
                 card-content
                 hover:shadow-md
                 p-0.2
-                md:px-2
-                md:py-1
-                text-center bg-secondary-dark
+                md:px-2 md:py-1
+                text-center
+                bg-secondary-dark
               "
             >
-              <p class="text-white sm:text-xs md:font-semibold md:text-sm">{{ brand.name }}</p>
+              <p class="text-white sm:text-xs md:font-semibold md:text-sm">
+                {{ brand.name }}
+              </p>
             </div>
           </div>
         </div>
@@ -142,32 +180,50 @@
         </h1>
       </div>
       <div class="slide-sec flex flex-row md:block">
-        <div class="flex md:grid overflow-x-auto flex-row mx-auto md:grid-cols-5 gap-1 md:gap-5 mt-5">
-            <div class="part-card" v-for="part in parts" :key="part.id">
+        <div
+          class="
+            flex
+            md:grid
+            overflow-x-auto
+            flex-row
+            mx-auto
+            md:grid-cols-5
+            gap-1
+            md:gap-5
+            mt-5
+          "
+        >
+          <div class="part-card" v-for="part in parts" :key="part.id">
             <div
-                class="cursor-pointer text-center category-card relative bg-contain bg-no-repeat"
-                :style="`
+              class="
+                cursor-pointer
+                text-center
+                category-card
+                relative
+                bg-contain bg-no-repeat
+              "
+              :style="`
                 background: url(http://res.cloudinary.com/ingen-cloud/${part.img})
                     no-repeat center center;
                 `"
             >
-                <div class="overlay rounded-md"></div>
-                <p
+              <div class="overlay rounded-md"></div>
+              <p
                 class="
-                    text-white text-base
-                    font-semibold
-                    absolute
-                    bottom-0
-                    text-center
-                    w-full
-                    mb-10
-                    z-10
+                  text-white text-base
+                  font-semibold
+                  absolute
+                  bottom-0
+                  text-center
+                  w-full
+                  mb-10
+                  z-10
                 "
-                >
+              >
                 {{ part.name }}
-                </p>
+              </p>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -190,34 +246,33 @@
           Featured Products
         </h1>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
         <div v-for="prod in latest_products" :key="prod.id" class="">
-          <ProductCard :title="prod.name" :description="prod.description" :price="prod.price"/>
+            <ProductCard
+              :id="prod.id"
+              :title="prod.name"
+              :description="prod.description"
+              :price="prod.price"
+              :category="prod.category"
+            />
         </div>
       </div>
     </div>
-
-    <!-- // footer section -->
-    <Footer />
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/Base/NavBar.vue";
 import ProductCard from "@/components/Products/ProductCard.vue";
-import Footer from "@/components/Base/Footer.vue";
 import CategoryBar from "@/components/Products/CategoryBar.vue";
-import MobileBar from '@/components/Base/MobileBar.vue';
+import MobileBar from "@/components/Base/MobileBar.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Home",
   components: {
-    Navbar,
     ProductCard,
-    Footer,
     CategoryBar,
-    MobileBar
+    MobileBar,
   },
   data() {
     return {
@@ -240,13 +295,13 @@ export default {
 </script>
 
 <style scoped>
-.hero-banner{
-    background-image: url("../../assets/img/homebanner3.jpg");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 400px;
-    width: 100%;
+.hero-banner {
+  background-image: url("../../assets/img/homebanner3.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 100%;
 }
 
 .section {
@@ -272,7 +327,7 @@ export default {
 }
 
 select {
-    width: 100%;
+  width: 100%;
   height: 40px;
   border: 1px solid #ccc;
   border-radius: 5px;

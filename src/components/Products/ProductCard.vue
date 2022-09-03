@@ -1,5 +1,5 @@
 <template>
-  <div class="card rounded-md shadow-md flex">
+  <router-link tag="a" class="card rounded-md shadow-md flex hover:shadow-lg cursor-pointer" :to="{ name: 'ProductDetails', params: { id: id, category_slug: category.slug } }">
     <div
       class="img-col h-full rounded-l-md"
       :style="`
@@ -9,19 +9,34 @@
     >
       <!-- <img src="@/assets/img/prod.png" class="w-full h-full rounded-l-md" alt=""> -->
     </div>
-    <div class="card-content px-2 py-4 text-left">
-      <h1 class="title text-sm font-bold mb-2">{{ title }}</h1>
-      <p class="desc text-xs mb-2">{{ description }}</p>
-      <p class="info text-xs mb-2">Part Number: GXL00000000004138</p>
-      <p class="info text-base font-bold mb-2">GH₵{{ price }}</p>
+    <div class="card-content px-4 py-4 text-left">
+      <h1 class="title text-base font-medium mb-2">{{ title }}</h1>
+      <p class="desc text-xs mb-3">{{ description }}</p>
+      <p class="info text-xs mb-1">
+        <span class="font-bold">Part Number: </span>GXL00000000004138
+      </p>
+      <p class="info text-xs mb-1">
+        <span class="font-bold">Condition: </span>GXL00000000004138
+      </p>
+      <p class="info text-xs mb-1">
+        <span class="font-bold">Brand: </span>GXL00000000004138
+      </p>
+      <p class="info text-xs mb-1">
+        <span class="font-bold">Seller Rating: </span>GXL00000000004138
+      </p>
+      <p class="info text-base font-bold relative bottom-0">GH₵{{ price }}</p>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
 export default {
   name: "ProductCard",
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     title: {
       type: String,
       default: "",
@@ -38,6 +53,10 @@ export default {
       type: String,
       default: 0,
     },
+    category: {
+      type: Object,
+      default: () => {},
+    }
   },
 };
 </script>
@@ -45,16 +64,34 @@ export default {
 <style scoped>
 .card {
   height: 250px;
-  /* width: 650px; */
+  max-width: 450px;
 }
 
 .img-col {
-  width: 100px;
+  width: 160px;
   z-index: 10;
   background: url(../../assets/img/prod.png);
 }
 
 .card-content {
   flex: 1;
+}
+
+.desc {
+  height: 33px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title {
+  height: 45px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

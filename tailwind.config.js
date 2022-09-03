@@ -31,7 +31,9 @@ module.exports = {
       'info': '#FF9B00'
     },
     backgroundColor: {
+      'white': '#FFFFFF',
       'light-gray': '#F5F5F5',
+      'dark-gray': '#bfbfbf',
       'grey': '#F8F8F8',
       'primary': '#0067FF',
       'secondary': '#121921',
@@ -48,7 +50,7 @@ module.exports = {
       'large': '12px',
     },
     fontSize: {
-      xs: ['12px', '16px'],
+      xs: ['14px', '16px'],
       sm: ['16px', '20px'],
       base: ['20px', '22px'],
       md: ['26px', '30px'],

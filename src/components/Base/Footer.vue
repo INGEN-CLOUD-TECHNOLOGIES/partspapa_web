@@ -1,5 +1,5 @@
 <template>
-  <div class="footer bottom-0 bg-secondary mt-20">
+  <div class="footer bottom-0 bg-secondary">
     <div
       class="
         flex
