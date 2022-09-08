@@ -10,7 +10,7 @@
       <!-- <img src="@/assets/img/prod.png" class="w-full h-full rounded-l-md" alt=""> -->
     </div>
     <div class="card-content px-4 py-4 text-left">
-      <h1 class="title text-base font-medium mb-2">{{ title }}</h1>
+      <h1 class="title text-sm md:text-base font-medium mb-2">{{ title }}</h1>
       <p class="desc text-xs mb-3">{{ description }}</p>
       <p class="info text-xs mb-1">
         <span class="font-bold">Part Number: </span>GXL00000000004138
@@ -19,12 +19,16 @@
         <span class="font-bold">Condition: </span>GXL00000000004138
       </p>
       <p class="info text-xs mb-1">
-        <span class="font-bold">Brand: </span>GXL00000000004138
+        <span class="font-bold">Vendor: </span>GXL00000000004138
       </p>
-      <p class="info text-xs mb-1">
+      <!-- <p class="info text-xs mb-1">ls
+      </p> -->
+      <!-- <p class="info text-xs mb-1">
         <span class="font-bold">Seller Rating: </span>GXL00000000004138
-      </p>
-      <p class="info text-base font-bold relative bottom-0">GH₵{{ price }}</p>
+      </p> -->
+      <div class="pricing h-10 mt-5 flex">
+        <p class="info text-base font-bold self-end">GH₵{{ price }}s</p>
+      </div>
     </div>
   </router-link>
 </template>
@@ -93,5 +97,19 @@ export default {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    height: 200px;
+  }
+
+  .img-col {
+    width: 120px;
+  }
+
+  .desc{
+    display: none !important;
+  }
 }
 </style>

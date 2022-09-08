@@ -17,6 +17,15 @@ export default {
     Navbar,
     Footer,
   },
+  watch: {
+    $route() {
+      // scroll to top with animation
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
+  },
 };
 </script>
 

@@ -1,19 +1,20 @@
 <template>
   <div class="navbar">
     <div class="flex layer-1 bg-secondary">
-      <div class="navbar-logo flex-auto">
+      <router-link to="/" tag="a" class="navbar-logo flex-auto">
         <img src="@/assets/img/logo1.png" alt="" />
-      </div>
-      <div class="flex menu my-auto flex-initial ml-5">
+      </router-link>
+      <!-- <div class="flex menu my-auto flex-initial ml-5">
         <img src="@/assets/img/menu.svg" class="h-10" alt=""><span class="ml-2 text-sm text-white my-auto">Menu</span>
-      </div>
+      </div> -->
       <div class="search-bar md:flex flex-initial my-auto hidden">
         <input
           type="text"
           placeholder="Search for products"
           class="outline-none border-none rounded-l"
+          v-model="search"
         />
-        <div class="search-btn bg-info cursor-pointer rounded-r"><span><img class="w-5" src="@/assets/img/zoom.svg" alt=""></span></div>
+        <div class="search-btn bg-info cursor-pointer rounded-r" @click="searchItem"><span><img class="w-5" src="@/assets/img/zoom.svg" alt=""></span></div>
       </div>
       <div class="navbar-menu flex-auto">
         <ul class="flex my-auto text-white h-full list-none">
@@ -36,7 +37,8 @@
         <div class="context">
             <ul class="flex">
                 <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Top Deals</li>
-                <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Buy Again</li>
+                <router-link to="/products" tag="a" class="mr-5 font-regular cursor-pointer hover:underline">All Products</router-link>
+                <router-link to="/brands" tag="a" class="mr-5 font-regular cursor-pointer hover:underline">Brands</router-link>
                 <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Saved</li>
                 <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Sell</li>
                 <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Customer Service</li>
@@ -47,7 +49,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "NavBar",
+  data() {
+    return {
+      search: "",
+    };
+  },
+  methods: {
+    searchItem() {
+      // pass search in query params
+      this.$router.push({ name: "ProductSearch", query: { query: this.search } });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -105,7 +120,7 @@ export default {};
 }
 
 .search-bar input {
-  width: 800px;
+  width: 600px;
   height: 40px;
   padding: 8px 20px;
 }

@@ -35,6 +35,14 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
       },
+      {
+        path: '/brands',
+        name: 'Brands',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '@/views/Catalogue/Brands.vue')
+      },
       // product pages with children
       {
         path: '/products',
@@ -53,6 +61,11 @@ const routes = [
               id: '',
               category_slug: ''
             }
+          },
+          {
+            path: '/products/search',
+            name: 'ProductSearch',
+            component: () => import('../views/Products/ProductSearch.vue')
           }
         ]
       },

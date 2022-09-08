@@ -1,20 +1,25 @@
 <template>
   <div class="container mx-auto py-10">
-    <BreadCrumbs/>
+    <loader v-if="showloader" object="#ff9633" color1="#ffffff" color2="#17fd3d" size="5" speed="2.5" bg="#343a40" objectbg="#999793" opacity="99" disableScrolling="false" name="dots"></loader>
+    <BreadCrumbs :crumbs="crumbs" />
     <div class="flex">
-      <FilterBar class="sticky top-4 w-72" />
-      <div class="window px-5">
+      <FilterBar class="sticky top-4" />
+      <div class="window px-5 w-full">
         <div class="grid grid-cols-1 md:grid-cols-1 gap-2">
           <div v-for="prod in products" :key="prod.id" class="">
-              <LongProductCard
-                :id="prod.id"
-                :title="prod.name"
-                :description="prod.description"
-                :price="prod.price"
-                :category="prod.category"
-              />
+            <LongProductCard
+              :id="prod.id"
+              :title="prod.name"
+              :description="prod.description"
+              :price="prod.price"
+              :category="prod.category"
+            />
           </div>
         </div>
+      </div>
+      <div class="ad-section rounded-md">
+
+
       </div>
     </div>
   </div>
@@ -32,10 +37,23 @@ export default {
   components: {
     FilterBar,
     LongProductCard,
-    BreadCrumbs
+    BreadCrumbs,
   },
   data() {
     return {
+      showloader: true,
+      crumbs: [
+        {
+          id: 0,
+          name: "Home",
+          link: "/",
+        },
+        {
+          id: 1,
+          name: "Products",
+          link: "/products",
+        },
+      ],
       products: [],
       categories: [],
       brands: [],
@@ -53,6 +71,9 @@ export default {
     this.products = await this.$store.state.products.products;
     this.categories = this.$store.state.categories;
     this.brands = this.$store.state.products.brands;
+    if (this.products.length > 0) {
+      this.showloader = false;
+    }
   },
   mounted() {
     this.getProducts();
@@ -62,6 +83,11 @@ export default {
 </script>
 
 <style scoped>
+.ad-section{
+  width: 400px;
+  height: 600px;
+  background-color: #b5b5b5;
+}
 .data {
   display: unset !important;
 }

@@ -121,8 +121,6 @@
       </div>
       <div class="brands mt-5">
         <div class="grid grid-cols-3 md:grid-cols-8 gap-1 md:gap-2">
-          <!-- brand data -->
-          <!-- {{this.$store.state.brands}} -->
           <div
             v-for="brand in brands"
             :key="brand.id"
@@ -162,7 +160,7 @@
     </div>
 
     <!-- brands section -->
-    <div class="section md:container sm:container">
+    <div class="section md:container container">
       <div class="border-b header-title">
         <h1
           class="
@@ -286,7 +284,7 @@ export default {
   methods: {
     ...mapActions("products", ["getBrands", "getParts", "getLatestProducts"]),
   },
-  mounted() {
+  beforeMount() {
     this.getBrands();
     this.getParts();
     this.getLatestProducts();
