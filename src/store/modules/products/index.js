@@ -52,6 +52,14 @@ const actions = {
         });
     },
 
+    getCategories({commit}){
+        getAPI('/api/products/categories').then(res => {
+            commit('GET_CATEGORIES', res.data);
+        }).catch(err => {
+            console.log(err);
+        });
+    },
+
     getLatestProducts({ commit }) {
         getAPI('/api/products/latest').then(res => {
             commit('GET_LATEST_PRODUCTS', res.data);
@@ -61,8 +69,8 @@ const actions = {
     },
 
     getProducts({ commit }) {
-        getAPI('/api/products').then(res => {
-            commit('GET_PRODUCTS', res.data);
+        getAPI('/api/products?limit=10').then(res => {
+            commit('GET_PRODUCTS', res.data.results);
         }).catch(err => {
             console.log(err);
         });
@@ -74,6 +82,7 @@ const getters = {
     getParts: state => state.parts,
     getLatestProducts: state => state.latest_products,
     getProducts: state => state.products,
+    getCategories: state => state.categories,
 }
 
 

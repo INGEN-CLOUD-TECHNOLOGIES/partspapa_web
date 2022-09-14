@@ -75,6 +75,7 @@
                 :description="prod.description"
                 :price="prod.price"
                 :category="prod.category"
+                :vendor="prod.vendor"
               />
           </div>
         </div>

@@ -9,23 +9,32 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      requiresLogin: false,
+    }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      requiresLogin: false,
+    }
+  },
+  {
     path: '/',
     component: Layout,
     children: [
       {
         path: '/',
         name: 'Home',
-        component: Home
-      },
-      {
-        path: '/login',
-        name: 'Login',
-        component: Login
-      },
-      {
-        path: '/register',
-        name: 'Register',
-        component: Register
+        component: Home,
+        meta: {
+          requiresLogin: false,
+        }
       },
       {
         path: '/about',
@@ -33,7 +42,10 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        meta: {
+          requiresLogin: false,
+        }
       },
       {
         path: '/brands',
@@ -41,7 +53,10 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '@/views/Catalogue/Brands.vue')
+        component: () => import(/* webpackChunkName: "about" */ '@/views/Catalogue/Brands.vue'),
+        meta: {
+          requiresLogin: false,
+        }
       },
       // product pages with children
       {
@@ -51,7 +66,10 @@ const routes = [
           {
             path: '/products',
             name: 'Product-Listing',
-            component: () => import('../views/Products/Product-Listing.vue')
+            component: () => import('../views/Products/Product-Listing.vue'),
+            meta: {
+              requiresLogin: false,
+            }
           },
           {
             path: '/products/details/:category_slug/:id',
@@ -60,12 +78,26 @@ const routes = [
             params: {
               id: '',
               category_slug: ''
+            },
+            meta: {
+              requiresLogin: false,
             }
           },
           {
             path: '/products/search',
             name: 'ProductSearch',
-            component: () => import('../views/Products/ProductSearch.vue')
+            component: () => import('../views/Products/ProductSearch.vue'),
+            meta: {
+              requiresLogin: false,
+            }
+          },
+          {
+            path: '/products/upload',
+            name: 'ProductUpload',
+            component: () => import('../views/Products/Upload.vue'),
+            meta: {
+              requiresLogin: true
+            }
           }
         ]
       },

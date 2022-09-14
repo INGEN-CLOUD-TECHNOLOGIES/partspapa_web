@@ -1,5 +1,5 @@
 <template>
-  <router-link tag="a" class="card bg-white hover:shadow-sm rounded flex cursor-pointer" :to="{ name: 'ProductDetails', params: { id: id, category_slug: category.slug } }">
+  <router-link tag="a" class="card bg-white hover:shadow-sm rounded flex cursor-pointer relative" :to="{ name: 'ProductDetails', params: { id: id, category_slug: category.slug } }">
     <div
       class="img-col rounded-l"
       :style="`
@@ -11,8 +11,7 @@
     </div>
     <div class="card-content px-4 py-4 text-left">
       <div class="card-head flex">
-        <h1 class="title text-base font-medium mb-2 w-full">{{ title }}</h1>
-        <div class="save-icon bg-info w-9">Save</div>
+        <h1 class="title text-base font-medium mb-2">{{ title }}</h1>
       </div>
       <p class="desc text-xs mb-4 h-11">{{ description }}</p>
       <p class="info text-xs mb-1"><span class="font-bold">Part Number: </span>GXL00000000004138</p>
@@ -21,6 +20,7 @@
       <p class="info text-xs mb-1"><span class="font-bold">Seller Rating: </span>GXL00000000004138</p>
       <p class="info text-base font-bold mb-2 mt-8">GH₵{{ price }}</p>
     </div>
+    <div class="save-icon w-9 text-center m-auto cursor-pointer z-40 absolute top-3 right-5 hover:hidden" @click="alert(3)"><font-awesome-icon class="text-base text-grey-light" :icon="['fas', 'fa-bookmark']" /></div>
   </router-link>
 </template>
 

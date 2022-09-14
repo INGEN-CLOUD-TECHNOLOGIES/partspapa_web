@@ -4,8 +4,9 @@
     <BreadCrumbs :crumbs='crumbs'/>
     <div class="flex">
       <FilterBar class="sticky top-4" />
-      <div class="window px-5 w-full">
-        <p class="text-left my-5"><b>{{ products.length }} </b>results for search: <b>{{ searchTerm }}</b></p>
+      <div class="window px-0.5 md:px-5 w-full">
+        <p class="text-left my-5" v-if="products.length>0"><b>{{ products.length }} </b>results for search: <b>{{ searchTerm }}</b></p>
+        <p class="text-left my-5" v-else>No results matching: <b>{{ searchTerm }}</b></p>
           <div v-if="products.length > 0" class="grid grid-cols-1 md:grid-cols-1 gap-2">
             <div v-for="prod in products" :key="prod.id">
                 <LongProductCard
@@ -17,12 +18,8 @@
                 />
             </div>
           </div>
-          <div v-else>
-            <!-- <LoadingDots :show='showloader' /> -->
-            <p class="text-left">No result(s) found for {{ searchTerm }}</p>
-          </div>
       </div>
-      <div class="ad-section rounded-md">
+      <div class="ad-section rounded-md hidden xl:block">
 
       </div>
     </div>

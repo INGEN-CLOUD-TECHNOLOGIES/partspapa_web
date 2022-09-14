@@ -1,4 +1,6 @@
 module.exports = {
+  purge: [],
+  darkMode: false,
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -6,22 +8,23 @@ module.exports = {
   theme: {
     container: {
       padding: {
-        DEFAULT: '1rem',
-        sm: '.5rem',
+        xs: "4px",
+        sm: '4px',
+        md: '6px',
         lg: '40px',
         xl: '50px',
-        '2xl': '6rem',
       },
     },
     screens: {
-      xs: '480px',
+      xs: '360px',
       sm: '480px',
       md: '768px',
       lg: '976px',
-      xl: '1440px',
+      xl: '1440px', 
     },
     colors: {
       'grey': '#333333',
+      'grey-light': '#cecece',
       'white': '#FFFFFF',
       'black': '#151515',
       'primary': '#0067FF',

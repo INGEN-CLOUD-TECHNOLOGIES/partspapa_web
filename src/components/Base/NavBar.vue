@@ -20,12 +20,14 @@
         <ul class="flex my-auto text-white h-full list-none">
           <li class="item my-auto mx-10">
             <div class="option flex h-full justify-center items-center cursor-pointer">
+                <div class="avatar_img"></div>
                 <div class="my-auto flex h-8">
                     <img src="@/assets/img/arrow_drop_down.svg" alt="" class="h-5 mr-2" />
                     <span class="text-sm">Account</span>
                 </div>
             </div>
           </li>
+            <div class="btn w-full bg-info p-2 sell-btn my-auto rounded text-black">Sell</div>
           <!-- <li class="item my-auto relative w-9">
             <img class="h-12" src="@/assets/img/shopping-bag.svg" alt="">
             <span class="count font-bold text-xs bg-info">1</span>
@@ -66,10 +68,6 @@ export default {
 </script>
 
 <style scoped>
-/* .item img{
-    width: 60px;
-    height: 50px;
-} */
 .count{
     position: absolute;
     top: -1px;
@@ -107,8 +105,6 @@ export default {
 .search-bar {
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
 }
 
 .search-btn {
@@ -125,7 +121,21 @@ export default {
   padding: 8px 20px;
 }
 
+.sell-btn{
+  width: 140px;
+  height: 40px;
+  padding: 8px 20px;
+}
+
 .item{
     height: 100%;
+}
+
+.avatar_img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: #fff;
+  margin-left: 10px;
 }
 </style>

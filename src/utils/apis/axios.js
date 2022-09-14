@@ -16,7 +16,7 @@ const baseURL = process.env.VUE_APP_ROOT_API;
 
 const getAPI = axios.create({
     baseURL: baseURL,
-    timeout: 9000,
+    timeout: 9000000,
 })
 
 export { getAPI }
@@ -56,7 +56,7 @@ getAPI.interceptors.response.use(
             return Promise.reject(error);
         }
 
-        if (error.response.status === 403) {
+        if (error.response.status === 403 || error.response.status === 401) {
             originalRequest._retry = true;
             const refreshToken = localStorageService.getRefreshToken();
             try {

@@ -88,19 +88,16 @@ export default {
 
     // login user
     login() {
-      const data = {
+      this.$store.dispatch('userLogin', {
         email: this.email,
-        password: this.password,
-      };
-      getAPI.post("/api-token/", data).then((res) => {
-        // if response is successfully logged in
-        if (res.status === 200) {
-          // store token in local storage
-          localStorage.setItem("token", res.data.token);
-          // redirect to dashboard
-          this.$router.push("/");
-        }
-      });
+        password: this.password
+      })
+      .then(
+          this.password = ''
+      )
+      .then(() => {
+        this.$router.push({ name: 'Home' })
+      })
     },
   },
   mounted() {

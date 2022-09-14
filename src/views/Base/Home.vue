@@ -8,7 +8,8 @@
       <div
         class="
           banner-content
-          w-1/2
+          lg:w-1/2
+          w-
           pl-16
           pr-32
           text-left
@@ -20,12 +21,12 @@
           absolute
         "
       >
-        <div class="caption font-headers text-lg font-semibold mb-10">
+        <h1 class="caption font-headers text-lg font-semibold mb-10">
           Everything you need to sell online. Trusted by millions of businesses
           worldwide.
-        </div>
+        </h1>
         <router-link
-          to="/register"
+          to="/products/upload"
           tag="div"
           class="btn bg-info rounded px-4 py-2 w-32 text-black cursor-pointer"
           >Start Selling</router-link
@@ -34,7 +35,7 @@
     </div>
 
     <!-- // category section -->
-    <div class="section flex container justify-between mt-6">
+    <div class="section flex container justify-between mt-6 mx-auto">
       <CategoryBar class="hidden md:block" />
       <div class="w-full">
         <div
@@ -104,7 +105,7 @@
     </div>
 
     <!-- brands section -->
-    <div class="section container">
+    <div class="section container mx-auto">
       <div class="border-b header-title">
         <h1
           class="
@@ -160,7 +161,7 @@
     </div>
 
     <!-- brands section -->
-    <div class="section md:container container">
+    <div class="section mx-auto container">
       <div class="border-b header-title">
         <h1
           class="
@@ -227,7 +228,7 @@
     </div>
 
     <!-- // product section -->
-    <div class="section container">
+    <div class="section container mx-auto">
       <div class="border-b header-title">
         <h1
           class="
@@ -244,7 +245,7 @@
           Featured Products
         </h1>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
         <div v-for="prod in latest_products" :key="prod.id" class="">
             <ProductCard
               :id="prod.id"
@@ -252,6 +253,7 @@
               :description="prod.description"
               :price="prod.price"
               :category="prod.category"
+              :vendor="prod.vendor"
             />
         </div>
       </div>
@@ -282,12 +284,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions("products", ["getBrands", "getParts", "getLatestProducts"]),
+    ...mapActions("products", ["getBrands", "getParts", "getLatestProducts", "getCategories"]),
   },
   beforeMount() {
     this.getBrands();
     this.getParts();
     this.getLatestProducts();
+    this.getCategories();
   },
 };
 </script>

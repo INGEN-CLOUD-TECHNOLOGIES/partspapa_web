@@ -5,6 +5,7 @@ import VuexPersist from 'vuex-persist';
 Vue.use(Vuex)
 
 import products from './modules/products'
+import user from './modules/user'
 
 const vuexLocalStorage = new VuexPersist({
   key: 'vuex', // The key to store the state on in the storage provider.
@@ -19,7 +20,8 @@ const vuexLocalStorage = new VuexPersist({
 export default new Vuex.Store({
   plugins: [vuexLocalStorage.plugin],
   modules: {
-    products
+    products,
+    user
   },
   state: {
   },

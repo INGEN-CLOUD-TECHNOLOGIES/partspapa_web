@@ -19,7 +19,7 @@
         <span class="font-bold">Condition: </span>GXL00000000004138
       </p>
       <p class="info text-xs mb-1">
-        <span class="font-bold">Vendor: </span>GXL00000000004138
+        <span class="font-bold">Vendor: </span>{{ vendor.name }}
       </p>
       <!-- <p class="info text-xs mb-1">ls
       </p> -->
@@ -27,7 +27,7 @@
         <span class="font-bold">Seller Rating: </span>GXL00000000004138
       </p> -->
       <div class="pricing h-10 mt-5 flex">
-        <p class="info text-base font-bold self-end">GH₵{{ price }}s</p>
+        <p class="info text-base font-bold self-end">GH₵{{ price }}</p>
       </div>
     </div>
   </router-link>
@@ -60,7 +60,11 @@ export default {
     category: {
       type: Object,
       default: () => {},
-    }
+    },
+    vendor: {
+      type: Object,
+      default: "",
+    },
   },
 };
 </script>
