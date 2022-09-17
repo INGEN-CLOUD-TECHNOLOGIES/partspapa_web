@@ -65,7 +65,7 @@
 import { getAPI } from "@/utils/apis/axios";
 
 export default {
-  name: "Home",
+  name: "Login",
   data() {
     return {
       img_id: 1,
@@ -74,18 +74,6 @@ export default {
     };
   },
   methods: {
-    // generate random numbers 1 to 3 every 10 seconds
-    randomNumber() {
-      this.img_id = Math.floor(Math.random() * 2) + 1;
-    },
-
-    // trigger random number evry 10 seconds recursively
-    randomNumberInterval() {
-      setInterval(() => {
-        this.randomNumber();
-      }, 10000);
-    },
-
     // login user
     login() {
       this.$store.dispatch('userLogin', {
@@ -96,12 +84,11 @@ export default {
           this.password = ''
       )
       .then(() => {
+        // get current user details
+        this.$store.dispatch('userInfo')
         this.$router.push({ name: 'Home' })
       })
     },
-  },
-  mounted() {
-    this.randomNumberInterval();
   },
 };
 </script>

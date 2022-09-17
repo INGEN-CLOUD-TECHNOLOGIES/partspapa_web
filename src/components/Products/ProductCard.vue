@@ -1,5 +1,5 @@
 <template>
-  <router-link tag="a" class="card rounded-md shadow-md flex hover:shadow-lg cursor-pointer" :to="{ name: 'ProductDetails', params: { id: id, category_slug: category.slug } }">
+  <router-link tag="a" class="card rounded-md shadow flex hover:shadow-md cursor-pointer" :to="{ name: 'ProductDetails', params: { id: id, category_slug: category.slug } }">
     <div
       class="img-col h-full rounded-l-md"
       :style="`

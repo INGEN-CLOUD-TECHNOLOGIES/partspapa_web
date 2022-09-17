@@ -30,4 +30,19 @@ export default {
 </script>
 
 <style>
+/* .cselect select{
+  appearance: none;
+}
+
+.cselect::after {
+  content: "\25b6";
+  position: absolute; 
+  top: 30%; 
+  right: 0px;
+  z-index: -1;
+}
+
+.cselect {
+  position: relative;
+} */
 </style>

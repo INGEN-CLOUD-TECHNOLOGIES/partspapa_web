@@ -1,13 +1,10 @@
 <template>
   <div class="navbar">
     <div class="flex layer-1 bg-secondary">
-      <router-link to="/" tag="a" class="navbar-logo flex-auto">
+      <router-link to="/" tag="a" class="navbar-logo">
         <img src="@/assets/img/logo1.png" alt="" />
       </router-link>
-      <!-- <div class="flex menu my-auto flex-initial ml-5">
-        <img src="@/assets/img/menu.svg" class="h-10" alt=""><span class="ml-2 text-sm text-white my-auto">Menu</span>
-      </div> -->
-      <div class="search-bar md:flex flex-initial my-auto hidden">
+      <div class="search-bar md:flex m-auto hidden">
         <input
           type="text"
           placeholder="Search for products"
@@ -16,23 +13,48 @@
         />
         <div class="search-btn bg-info cursor-pointer rounded-r" @click="searchItem"><span><img class="w-5" src="@/assets/img/zoom.svg" alt=""></span></div>
       </div>
-      <div class="navbar-menu flex-auto">
-        <ul class="flex my-auto text-white h-full list-none">
-          <li class="item my-auto mx-10">
+      <div class="help-section w-28 my-auto">
+        <font-awesome-icon :icon="['fa', 'fa-question']" class="text-sm m-auto flex text-center text-white" />
+        <p class="text-white text-xs font-bold underline cursor-pointer mt-1">Help</p>
+      </div>
+      <div class="dropdown">
+        <div v-if="is_logged_in" class="navbar-menu flex h-full">
+          <div class="flex my-auto text-white h-full">
+            <!-- <div class="btn w-full bg-info p-2 sell-btn my-auto rounded text-black">Sell</div> -->
+            <div class="item my-auto">
+              <div class="option flex h-full justify-center items-center cursor-pointer">
+                  <div class="my-auto h-8 text-left">
+                      <p class="info text-xs capitalize">Hello, {{ user_fname }}</p>
+                      <span class="text-xs my-auto font-bold">Account & Lists</span>
+                  </div>
+                  <div class="avatar_img"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else class="flex my-auto text-white h-full">
+          <div class="item my-auto underline cursor-pointer">
             <div class="option flex h-full justify-center items-center cursor-pointer">
-                <div class="avatar_img"></div>
-                <div class="my-auto flex h-8">
-                    <img src="@/assets/img/arrow_drop_down.svg" alt="" class="h-5 mr-2" />
-                    <span class="text-sm">Account</span>
+                <div class="my-auto h-8 text-left">
+                    <p class="info text-xs capitalize">Howdy, Sign in</p>
+                    <span class="text-xs my-auto font-bold">To Start Selling</span>
                 </div>
             </div>
-          </li>
-            <div class="btn w-full bg-info p-2 sell-btn my-auto rounded text-black">Sell</div>
-          <!-- <li class="item my-auto relative w-9">
-            <img class="h-12" src="@/assets/img/shopping-bag.svg" alt="">
-            <span class="count font-bold text-xs bg-info">1</span>
-          </li> -->
-        </ul>
+          </div>
+        </div>
+        <div class="dropdown-content text-left rounded">
+          <div class="nav-arrow" style="position: absolute;"><div class="nav-arrow-inner"></div></div>
+          <div class="dropdown-title text-sm font-bold mb-1">
+            Your Account
+          </div>
+          <div class="dropdown-item">
+            <a href="#" class="nav-link nav-item text-xs hover:text-secondary hover:underline">Saved Items</a>
+            <a href="#" class="nav-link nav-item text-xs hover:text-secondary hover:underline">Vendor Profile</a>
+            <a href="#" class="nav-link nav-item text-xs hover:text-secondary hover:underline">Upload Products</a>
+            <a href="#" class="nav-link nav-item text-xs hover:text-secondary hover:underline">Switch Account</a>
+            <a href="#" class="nav-link nav-item text-xs hover:text-secondary hover:underline">Sign Out</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="layer-2 bg-secondary-dark md:flex text-white hidden">
@@ -42,7 +64,7 @@
                 <router-link to="/products" tag="a" class="mr-5 font-regular cursor-pointer hover:underline">All Products</router-link>
                 <router-link to="/brands" tag="a" class="mr-5 font-regular cursor-pointer hover:underline">Brands</router-link>
                 <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Saved</li>
-                <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Sell</li>
+                <router-link to="/products/upload" tag="a" class="mr-5 font-regular cursor-pointer hover:underline">Sell</router-link>
                 <li class="mr-5 font-regular cursor-pointer hover:font-semibold">Customer Service</li>
             </ul>
         </div>
@@ -56,6 +78,8 @@ export default {
   data() {
     return {
       search: "",
+      user_fname: '',
+      is_logged_in: false,
     };
   },
   methods: {
@@ -64,10 +88,57 @@ export default {
       this.$router.push({ name: "ProductSearch", query: { query: this.search } });
     },
   },
+  mounted() {
+    // get user info
+    this.$store.dispatch("userInfo");
+    this.user_fname = this.$store.state.user.user_info.firstname;
+    if(this.$store.state.user.user_info.firstname) {
+      this.is_logged_in = true;
+    }
+  },
 };
 </script>
 
 <style scoped>
+.nav-arrow {
+    border-style: solid;
+    _border-style: dashed;
+    border-width: 9px;
+    border-color: transparent;
+    border-top-width: 0;
+    border-bottom: 9px solid #f1f1f1;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: -9px;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.nav-link:hover{
+  text-decoration: underline !important;
+  color: #FF8200 !important;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 4px 2px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+  padding: 10px 20px;
+}
+
 .count{
     position: absolute;
     top: -1px;
@@ -91,6 +162,7 @@ export default {
 
 .navbar-logo{
     height: 60px;
+    width: 200px;
 }
 
 .layer-1 {

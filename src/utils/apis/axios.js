@@ -21,9 +21,11 @@ const getAPI = axios.create({
 
 export { getAPI }
 
+/// check if user is authenticated from store
 
 // LocalstorageService
 const localStorageService = LocalStorageService.getService();
+const tokens = LocalStorageService.getAccessToken();
 
 // Add a request interceptor
 getAPI.interceptors.request.use(
@@ -56,7 +58,7 @@ getAPI.interceptors.response.use(
             return Promise.reject(error);
         }
 
-        if (error.response.status === 403 || error.response.status === 401) {
+        if (error.response.status === 403 || error.response.status === 401 && tokens) {
             originalRequest._retry = true;
             const refreshToken = localStorageService.getRefreshToken();
             try {

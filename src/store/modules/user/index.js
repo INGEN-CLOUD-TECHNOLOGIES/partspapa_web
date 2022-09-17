@@ -10,6 +10,7 @@ export default ({
         refreshToken: null,
         APIData: '',
         error: false,
+        user_info: {}
     },
     mutations: {
         updateStorage(state, { access, refresh }) {
@@ -21,9 +22,19 @@ export default ({
             state.refreshToken = null
             localStorage.removeItem('access_token')
             localStorage.removeItem('refresh_token');
+        },
+        userInfo(state, info){
+            state.user_info = info
         }
     },
     actions: {
+        userInfo({ commit }) {
+            getAPI('/api/users/current/').then(res => {
+                commit('userInfo', res.data)
+            }).catch(err => {
+                console.log(err);
+            });
+        },
 
         userLogout(context) {
             if (context.getters.loggedIn) {
@@ -114,6 +125,7 @@ export default ({
         },
         userToken(state) {
             return state.accessToken
-        }
+        },
+        getUserInfo: state => state.userInfo,
     },
 })

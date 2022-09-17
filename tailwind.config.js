@@ -42,6 +42,7 @@ module.exports = {
       'secondary': '#121921',
       'primary-dark': '#222240',
       'secondary-dark': '#424C53',
+      'secondary-light': '#aeb2b5',
       'info': '#FF9B00'
     },
     borderRadius: {

@@ -58,7 +58,6 @@ const routes = [
           requiresLogin: false,
         }
       },
-      // product pages with children
       {
         path: '/products',
         component: () => import('../views/Products/Products.vue'),
@@ -100,6 +99,14 @@ const routes = [
             }
           }
         ]
+      },
+      {
+        path: '/sellerpage/:id',
+        name: 'SellerPage',
+        component: () => import('../views/Vendor/Profile.vue'),
+        meta: {
+          requiresLogin: false,
+        }
       },
     ]
   },
