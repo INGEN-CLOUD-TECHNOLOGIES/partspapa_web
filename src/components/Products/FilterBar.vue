@@ -5,8 +5,8 @@
         <input type="text" class="brand-search outline-none w-full h-8 rounded-lg px-2 mt-2 py-1" placeholder="Search brands">
         <div class="scrolls">
             <ul class="lists text-left" v-for="brand in brands" :key="brand.id">
-                <li class="h-8 my-auto flex hover:bg-light-gray pl-2">
-                    <input type="checkbox" name="brand" :id="`${brand.name}`" class="chk mr-2"><label :for="`${brand.name}`" class="content m-auto w-full cursor-pointer">{{ brand.name }}</label>
+                <li class="h-8 my-auto flex hover:bg-light-gray pl-2 place-content-center">
+                    <input type="checkbox" name="brand" :id="`${brand.name}`" class="chk mr-2 my-auto"><label :for="`${brand.name}`" class="content m-auto w-full cursor-pointer">{{ brand.name }}</label>
                 </li>
             </ul>
         </div>
@@ -55,47 +55,47 @@
         <h1 class="uppercase text-left text-sm font-bold">Product Rating</h1>
         <ul class="ratings mt-4">
             <li class="mb-3 flex place-content-around">
-                <input type="radio" name="4-star" id="">
-                <div class="icons">
+                <input type="radio" class="my-auto" name="4-star" id="4-star">
+                <label class="icons" for="4-star">
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
-                </div>
+                </label>
                 <p class="ml-5">& above</p>
             </li>
             <li class="mb-3 flex place-content-around">
-                <input type="radio" name="4-star" id="">
-                <div class="icons">
+                <input type="radio" class="my-auto" name="3-star" id="3-star">
+                <label class="icons" for="3-star">
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
-                </div>
+                </label>
                 <p class="ml-5">& above</p>
             </li>
             <li class="mb-3 flex place-content-around">
-                <input type="radio" name="4-star" id="">
-                <div class="icons">
+                <input type="radio" class="my-auto" name="2-star" id="2-star">
+                <label class="icons" for="2-star">
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
-                </div>
+                </label>
                 <p class="ml-5">& above</p>
             </li>
             <li class="mb-3 flex place-content-around">
-                <input type="radio" name="4-star" id="">
-                <div class="icons">
+                <input type="radio" class="my-auto" name="1-star" id="1-star">
+                <label class="icons" for="1-star">
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-secondary"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
                     <font-awesome-icon :icon="['fas', 'star']" class="text text-grey-light"/>
-                </div>
+                </label>
                 <p class="ml-5">& above</p>
             </li>
         </ul>

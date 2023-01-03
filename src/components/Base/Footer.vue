@@ -1,5 +1,5 @@
 <template>
-  <div class="footer bottom-0 bg-secondary">
+  <div class="footer bottom-0 bg-secondary hidden lg:block">
     <div
       class="
         flex

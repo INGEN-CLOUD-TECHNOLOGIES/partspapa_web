@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import store from '../..'
 import { getAPI } from '../../../utils/apis/axios'
 
 Vue.use(Vuex)
@@ -22,6 +23,9 @@ export default ({
             state.refreshToken = null
             localStorage.removeItem('access_token')
             localStorage.removeItem('refresh_token');
+            // remove permissions from getters loggedIn
+            store.getters.loggedIn = false
+
         },
         userInfo(state, info){
             state.user_info = info
@@ -39,6 +43,7 @@ export default ({
         userLogout(context) {
             if (context.getters.loggedIn) {
                 context.commit('destroyToken')
+                context.commit('userInfo', {})
             }
         },
 

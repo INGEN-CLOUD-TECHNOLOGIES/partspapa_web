@@ -7,28 +7,26 @@
       <div class="overlay"></div>
       <div
         class="
-          banner-content
-          lg:w-1/2
-          w-
-          pl-16
-          pr-32
+          container 
+          mx-auto
+          section
           text-left
           flex flex-col
           h-full
           place-content-center
           text-white
           z-10
-          absolute
+          relative
         "
       >
-        <h1 class="caption font-headers text-lg font-semibold mb-10">
+        <h1 class="caption lg:w-128 font-headers text-lg font-semibold mb-10">
           Everything you need to sell online. Trusted by millions of businesses
           worldwide.
         </h1>
         <router-link
           to="/products/upload"
           tag="div"
-          class="btn bg-info rounded px-4 py-2 w-32 text-black cursor-pointer"
+          class="btn bg-info rounded px-4 py-2 w-32 text-black cursor-pointer text-center"
           >Start Selling</router-link
         >
       </div>
@@ -123,7 +121,7 @@
       <div class="brands mt-5">
         <div class="grid grid-cols-3 md:grid-cols-8 gap-1 md:gap-2">
           <div
-            v-for="brand in brands"
+            v-for="brand in brands.slice(0, 12)"
             :key="brand.id"
             class="
               card
@@ -298,7 +296,7 @@ export default {
 <style scoped>
 .hero-banner {
   background-image: url("../../assets/img/homebanner3.jpg");
-  background-size: contain;
+  /* background-size: contain; */
   background-position: center;
   background-repeat: no-repeat;
   height: 400px;
@@ -339,6 +337,11 @@ select {
 
 .card-img img {
   max-height: 100px;
+}
+
+/* remove background from img */
+img {
+  mix-blend-mode: multiply;
 }
 
 .form-group {

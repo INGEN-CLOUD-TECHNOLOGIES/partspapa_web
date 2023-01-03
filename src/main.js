@@ -7,7 +7,13 @@ import '@/utils/index.css'
 import loader from "vue-ui-preloader";
 import FAIcon from "@/utils/fonts/fontawesome-icons.js"
 import VTooltip from 'v-tooltip'
+import VueNotification from "@kugatsu/vuenotification";
 
+
+
+Vue.use(VueNotification, {
+  timer: 10
+});
 Vue.use(VTooltip)
 Vue.config.productionTip = false
 Vue.use(loader)
@@ -18,23 +24,28 @@ new Vue({
   router,
   loader:loader,
   store,
-  // scroll to top on route change
-  // https://router.vuejs.org/guide/advanced/scroll-behavior.html
+  // check router guard
 
   beforeRouteEnter(to, from, next) {
-    if (to.matched.some((record) => record.meta.requiresLogin)) {
+    // if route require login
+    if (to.matched.some(record => record.meta.requiresLogin)) {
+      // check if user is authenticated from store
       if (!store.getters.loggedIn) {
-        next({ name: "Signin" });
+        // if not authenticated redirect to login page
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+        this.$notification.error("Please Login to start selling.", { infiniteTimer: false });
       } else {
-        next();      
-        // Scroll page to top on every route change
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 100);
+        // if authenticated continue to route
+        next()
       }
     } else {
-      next();
+      // if route does not require login continue to route
+      next()
     }
   },
+
   render: h => h(App)
 }).$mount('#app')

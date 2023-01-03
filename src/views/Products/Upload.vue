@@ -230,8 +230,14 @@ export default {
         
     },
     mounted(){
-        this.$store.state.user.user_info ? this.vendor = this.$store.state.user.user_info : this.vendor = '';
-        this.vendor_name = this.$store.state.user.user_info.firstname + ' ' + this.$store.state.user.user_info.lastname;
+        // if localstorage contains access and refresh token
+        if(localStorage.getItem('access_token') && localStorage.getItem('refresh_token')){
+                this.vendor_name = res.data.first_name + ' ' + res.data.last_name;
+                this.$store.state.user.user_info ? this.vendor = this.$store.state.user.user_info : this.vendor = '';
+        } else {
+            this.$router.push({ name: "Home" });
+            this.$notification.error("Please Login to start selling.", { infiniteTimer: false, showCloseIcn: true });
+        }
     }
 }
 </script>

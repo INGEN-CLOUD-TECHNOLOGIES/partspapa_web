@@ -31,7 +31,8 @@ module.exports = {
       'secondary': '#FF8200',
       'primary-dark': '#222240',
       'secondary-dark': '#424C53',
-      'info': '#FF9B00'
+      'info': '#FF9B00',
+      'danger': '#FF0000',
     },
     backgroundColor: {
       'white': '#FFFFFF',

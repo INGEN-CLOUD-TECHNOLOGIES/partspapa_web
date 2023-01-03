@@ -62,8 +62,6 @@
 </template>
 
 <script>
-import { getAPI } from "@/utils/apis/axios";
-
 export default {
   name: "Login",
   data() {

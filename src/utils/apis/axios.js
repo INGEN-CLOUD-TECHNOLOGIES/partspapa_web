@@ -2,7 +2,7 @@ import axios from 'axios'
 // import NProgress from "vue-nprogress";
 // import Vue from "vue";
 import LocalStorageService from "./token";
-// import router from "../../router";
+import router from "../../router";
 
 
 // Vue.use(NProgress)
@@ -25,7 +25,7 @@ export { getAPI }
 
 // LocalstorageService
 const localStorageService = LocalStorageService.getService();
-const tokens = LocalStorageService.getAccessToken();
+// const tokens = LocalStorageService.getAccessToken();
 
 // Add a request interceptor
 getAPI.interceptors.request.use(
@@ -54,11 +54,12 @@ getAPI.interceptors.response.use(
             error.response.status === 401 &&
             originalRequest.url === `${baseURL}/auth-token/`
         ) {
-            router.push("/login");
+            router.push({ name: "Home" });
+            this.$notification.error("Please Login to start selling.", { infiniteTimer: false });
             return Promise.reject(error);
         }
 
-        if (error.response.status === 403 || error.response.status === 401 && tokens) {
+        if (error.response.status === 403 || error.response.status === 401 && localStorageService.getAccessToken()) {
             originalRequest._retry = true;
             const refreshToken = localStorageService.getRefreshToken();
             try {
@@ -70,13 +71,16 @@ getAPI.interceptors.response.use(
                     return getAPI(originalRequest);
                 } else {
                     localStorageService.clearToken()
-                    router.push("/login");
+                    this.$notification.error("Please Login to start selling.", { infiniteTimer: false });
+                    router.push({ name: "Home" });
                 }
             } catch (error) {
                 localStorageService.clearToken();
-                router.push("/login");
+                router.push({ name: "Home" });
                 return Promise.reject(error);
             }
+        } else {
+            return Promise.reject(error);
         }
 
         // if (error.response.status === 404) {
