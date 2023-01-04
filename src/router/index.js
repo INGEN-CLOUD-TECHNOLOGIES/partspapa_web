@@ -25,6 +25,17 @@ const routes = [
     }
   },
   {
+    path: '/otp',
+    name: 'OTP',
+    component: () => import('../views/Auth/OTP.vue'),
+    meta: {
+      requiresLogin: false,
+    },
+    params: {
+      email: null,
+    }
+  },
+  {
     path: '/',
     component: Layout,
     children: [

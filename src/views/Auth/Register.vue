@@ -139,7 +139,10 @@ export default {
           roles: 'customer'
         };
         getAPI.post("/api/users/register/", data).then((res) => {
-          // if status is 20
+          if (res.status === 201) {
+            this.$store.commit("setRegisteredEmail", res.data.email);
+            this.$router.push({ name: "OTP" });
+          }
         });
       }
     },

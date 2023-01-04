@@ -94,14 +94,13 @@
                         <div class="flex w-full place-content-between mb-8">
                             <div class="text-left flex flex-col">
                                 <label for="subtype" class="text-left text-xs">Subtype</label>
-                                <input id="subtype" class="w-full rounded outline-none" placeholder="Select Part" type="text">
+                                <input id="subtype" class="w-full rounded outline-none" placeholder="Select Part" type="text" v-model="form.subtype">
                             </div>
                             <div class="text-left flex flex-col">
                                 <label for="condition" class="text-left text-xs">Condition</label>
-                                <select class="w-full rounded outline-none" v-model="form.condition" required>
+                                <select class="w-full rounded outline-none" v-model="form.item_condition" required>
                                     <option value="">Select Product Condition</option>
-                                    <option value="">Brand New</option>
-                                    <option value="">Used</option>
+                                    <option name="" id="" v-for="condition in conditions" :key="condition.id" :value="condition.id">{{ condition }}</option>
                                 </select>
                             </div>
                         </div>
@@ -113,7 +112,7 @@
                         <div class="flex w-full place-content-between mb-8">
                             <div class="text-left flex flex-col">
                                 <label for="model" class="text-left text-xs">Model</label>
-                                <input id="model" class="w-full rounded outline-none" placeholder="Choose Model" type="text">
+                                <input id="model" class="w-full rounded outline-none" placeholder="Choose Model" type="text" v-model="form.car_model">
                             </div>
                             <div class="text-left flex flex-col">
                                 <label for="year" class="text-left text-xs">Year</label>
@@ -161,6 +160,11 @@ export default {
             err: '',
             vendor: '',
             vendor_name: '',
+            conditions: [
+                'Brand New',
+                'Used',
+                'Refurbished'
+            ],
             form: {
                 name: '',
                 category: '',
@@ -170,7 +174,9 @@ export default {
                 price: '',
                 description: '',
                 year: '',
-                condition: '',
+                item_condition: '',
+                subtype: '',
+                car_model: '',
             },
             current_step: 1,
         }
@@ -181,7 +187,7 @@ export default {
             for (let i = 0; i < files.length; i++) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    if (files[i].size < 3000000 && files[i].type == 'image/jpeg') {
+                    if (files[i].size < 3000000 && files[i].type == 'image/jpeg' || files[i].type == 'image/png') {
                         this.form.images.push(e.target.result);
                     } else {
                         this.err = 'File size must not exceed 2mb and must be a jpeg file';

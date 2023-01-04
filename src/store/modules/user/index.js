@@ -11,7 +11,8 @@ export default ({
         refreshToken: null,
         APIData: '',
         error: false,
-        user_info: {}
+        user_info: {},
+        registeredEmail: null,
     },
     mutations: {
         updateStorage(state, { access, refresh }) {
@@ -29,9 +30,18 @@ export default ({
         },
         userInfo(state, info){
             state.user_info = info
+        },
+
+        setRegisteredEmail(state, email) {
+            state.registeredEmail = email
         }
     },
     actions: {
+        // set user info on first registration
+        setRegisteredEmail(context, email) {
+            context.commit('setRegisteredEmail', email)
+        },
+
         userInfo({ commit }) {
             getAPI('/api/users/current/').then(res => {
                 commit('userInfo', res.data)
