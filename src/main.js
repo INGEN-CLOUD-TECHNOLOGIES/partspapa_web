@@ -20,6 +20,26 @@ Vue.use(loader)
 Vue.component('font-awesome-icon', FAIcon)
 Vue.component('file-upload', require('@yazan.alnughnugh/file-upload').default);
 
+Vue.use(VueNotification, {
+  timer: 10,
+  error: {
+    background: "green",
+    color: "white",
+  },
+  success: {
+    background: "green",
+    color: "white"
+  },
+  new: {
+    background: "white",
+    color: "black"
+  },
+  dark: {
+    background: "black",
+    color: "white"
+  },
+});
+
 new Vue({
   router,
   loader:loader,

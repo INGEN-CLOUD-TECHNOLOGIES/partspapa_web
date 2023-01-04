@@ -142,6 +142,12 @@ export default {
           if (res.status === 201) {
             this.$store.commit("setRegisteredEmail", res.data.email);
             this.$router.push({ name: "OTP" });
+            this.$notification.success(
+              "OTP has been sent to your email",
+              {
+                title: "Success"
+              }
+            );
           }
         });
       }

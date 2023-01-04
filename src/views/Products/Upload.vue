@@ -190,6 +190,7 @@ export default {
                     if (files[i].size < 3000000 && files[i].type == 'image/jpeg' || files[i].type == 'image/png') {
                         this.form.images.push(e.target.result);
                     } else {
+                        this.$notification.error('An error occured', 'File size must not exceed 2mb and must be a jpeg file');
                         this.err = 'File size must not exceed 2mb and must be a jpeg file';
                     }
                 };
@@ -212,7 +213,13 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(res => {
-                console.log(res)
+                this.$notification.success(
+                    'Product uploaded successfully',
+                    {
+                        title: 'Success',
+                        duration: 5000,
+                    }
+                );
             }).catch(err => {
                 console.log(err);
             })

@@ -113,37 +113,37 @@ name: "Home",
             if (!(keyCode < 48 || keyCode > 57) && keyCode !== 46) {
                 // 46 is dot
                 try {
-                $event.target.nextElementSibling.focus();
+                    this.otp = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6;
+                    $event.target.nextElementSibling.focus();
                 } catch {
                 // do nothing
                 }
             } else if (keyCode > 95 && keyCode < 106) {
                 // 46 is dot
                 try {
-                $event.target.nextElementSibling.focus();
+                    // add value to otp
+                    this.otp = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6;
+                    $event.target.nextElementSibling.focus();
                 } catch {
                 // do nothing
                 }
-            } else if (keyCode == 8) {
+            } else if (keyCode == 8 || keyCode == 37) {
                 // 46 is dot
                 try {
-                $event.target.previousElementSibling.focus();
-                } catch {
-                // do nothing
-                }
-            } else if (keyCode == 37) {
-                // 46 is dot
-                try {
-                $event.target.previousElementSibling.focus();
+                    // add value to otp
+                    this.otp = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6;
+                    $event.target.previousElementSibling.focus();
                 } catch {
                 // do nothing
                 }
             } else if (keyCode == 39) {
                 // 46 is dot
                 try {
-                $event.target.nextElementSibling.focus();
+                    // add value to otp
+                    this.otp = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6;
+                    $event.target.nextElementSibling.focus();
                 } catch {
-                // do nothing
+                    // do nothing
                 }
             } else {
                 $event.target.value = "";
@@ -153,21 +153,57 @@ name: "Home",
         sendOTP(){
             // combine codes#
             this.otp = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6;
-            // send otp to server
-            getAPI.post('api/users/otp/', {email: this.email, otp: this.otp}).then((response) => {
-                // console.log(response.data);
-                if(response.data.message == 'OTP verified'){
-                    // redirect to dashboard
-                    this.$router.push({ name: 'Login' });
-                }else{
-                    // show error message
-                    alert('OTP verification failed')
-                }
-            }).catch((error) => {
+            // if otp is less than 6 digits
+            if(this.otp.length < 6){
                 // show error message
-                alert('An error occured. Please try again later.');
-            });
-        }
+                this.$notification.dark(
+                    "OTP is incorrect. Enter all 6 digits OTP.",
+                    {
+                        title: "Error",
+                        background: "green",
+                        color: "white",
+                    }
+                );
+            }else{
+                // send otp to server
+                getAPI.post('api/users/otp/', {email: this.email, otp: this.otp}).then((response) => {
+                    // console.log(response.data);
+                    if(response.data.message == 'OTP verified'){
+                        // redirect to dashboard
+                        this.$router.push({ name: 'Login' });
+                    }else{
+                        // show error message
+                        alert(response.data.message)
+                        this.$notification.error(
+                            "OTP is incorrect. Please try again.",
+                            {
+                                title: "Error",
+                                background: "green",
+                                color: "white",
+                            }
+                        );
+                    }
+                }).catch((error) => {
+                    // show error message
+                    this.$notification.dark(
+                        "OTP is incorrect. Please try again.",
+                        {
+                            title: "Error",
+                            background: "green",
+                            color: "white",
+                        }
+                    );
+                });
+            }
+        },
+    },
+    watch: {
+        // watch otp
+        otp: function (val) {
+            if(val.length == 6){
+                this.sendOTP();
+            }
+        },
     },
     mounted() {
         this.randomNumberInterval();
