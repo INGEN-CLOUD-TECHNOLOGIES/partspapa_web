@@ -1,6 +1,6 @@
 <template>
   <div class="navbar  bg-secondary">
-    <div class="flex layer-1 m-auto bg-secondary container">
+    <div class="flex layer-1 m-auto bg-secondary container place-content-between">
       <router-link to="/" tag="a" class="navbar-logo">
         <img src="@/assets/img/logo1.png" alt="" />
       </router-link>
@@ -59,7 +59,27 @@
           </div>
         </div>
       </div>
+
+      <!-- mobile hambuger -->
+      <div class="layer-3 my-auto md:hidden text-white justify-end" @click="showMenu">
+        <!-- svg -->
+        <svg
+          class="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          ></path>
+        </svg>
+      </div>
     </div>
+
     <div class="layer-2 bg-secondary-dark md:flex text-white hidden">
       <div class="container mx-auto text-left">
         <ul class="flex">
@@ -72,11 +92,16 @@
         </ul>
       </div>
     </div>
+
+    <nav-drawer class="fixed z-50 top-0 right-0 invisible nav-drawer transition-all" />
+    <div class="overlay invisible" @click="closeNav"></div>
   </div>
 </template>
 
 <script>
+import NavDrawer from './NavDrawer.vue';
 export default {
+  components: { NavDrawer },
   name: "NavBar",
   data() {
     return {
@@ -97,6 +122,22 @@ export default {
     login(){
       this.$router.push({ name: "Login" });
     },
+
+    showMenu() {
+      // show nav drawer
+      document.querySelector(".nav-drawer").classList.remove("invisible");
+      document.querySelector(".overlay").classList.remove("invisible");
+      // lock body
+      document.body.style.overflow = "hidden";
+    },
+
+    closeNav(){
+      document.querySelector(".nav-drawer").classList.add("invisible");
+      document.querySelector(".overlay").classList.add("invisible");
+      // unlock body
+      document.body.style.overflow = "auto";
+      
+    }
   },
   watch: {
     //  watch for user is loggedIn
@@ -119,6 +160,25 @@ export default {
 </script>
 
 <style scoped>
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 49;
+  /* visibility: hidden; */
+  transition: visibility 0s, opacity 5s linear;
+}
+
+.nav-drawer{
+  transition: visibility 0s, opacity 5s linear;
+}
+
+/* animate nav-drawer */
+
+
 .nav-arrow {
     border-style: solid;
     _border-style: dashed;

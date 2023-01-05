@@ -54,8 +54,10 @@ getAPI.interceptors.response.use(
             error.response.status === 401 &&
             originalRequest.url === `${baseURL}/auth-token/`
         ) {
-            router.push({ name: "Home" });
+            router.push({ name: "Login" });
             this.$notification.error("Please Login to start selling.", { infiniteTimer: false });
+            // clear token
+            localStorageService.clearToken();
             return Promise.reject(error);
         }
 
@@ -72,7 +74,7 @@ getAPI.interceptors.response.use(
                 } else {
                     localStorageService.clearToken()
                     this.$notification.error("Please Login to start selling.", { infiniteTimer: false });
-                    router.push({ name: "Home" });
+                    router.push({ name: "Login" });
                 }
             } catch (error) {
                 localStorageService.clearToken();

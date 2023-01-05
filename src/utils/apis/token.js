@@ -1,3 +1,5 @@
+import store from "../../store";
+
 // LocalStorageService.js
 const LocalStorageService = (function(){
     var _service;
@@ -26,6 +28,10 @@ const LocalStorageService = (function(){
     function _clearToken() {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
+        // clear from store
+        // store.getters.loggedIn = false
+        store.dispatch('userLogout')
+
     }
     
     return {

@@ -1,77 +1,72 @@
 <template>
-    <div class="">
-        <div class="flex w-full">
-        <div class="left-panel hidden md:block relative">
-            <!-- <div class="cta-info">
-            this is a test
-            </div> -->
+    <div class="flex w-full m-auto">
+        <div class="left-panel hidden lg:block relative">
             <div class="img_overlay"></div>
             <img src="@/assets/img/hero2.png" class="res-img w-full" alt="" />
         </div>
-        <div class="w-full flex place-content-center m-auto p-[65px]">
-            <div class="form text-left w-[500]">
-            <p class="info text-grey text-base">Hello There! 👋</p>
-            <h1 class="font-bold mb-8 text-md">Please enter the One-Time Password to verify your account</h1>
-            <form @submit.prevent="sendOTP" class="my-10">
-                <div class="form-group flex flex-col">
-                    <!-- <label for="password" class="font-semibold mb-1">Password:</label> -->
-                    <!-- form group -->
-                    <div class="flex flex-col">
-                        <div class="flex">
-                        <input
-                            type="text"
-                            class="form-control w-1/6 mr-2"
-                            v-model="code1"
-                            maxlength="1"
-                            v-on:keyup="focusNextInput"
-                        />
-                        <input
-                            type="text"
-                            class="form-control w-1/6 mr-2"
-                            v-model="code2"
-                            maxlength="1"
-                            v-on:keyup="focusNextInput"
-                        />
-                        <input
-                            type="text"
-                            class="form-control w-1/6 mr-2"
-                            v-model="code3"
-                            maxlength="1"
-                            v-on:keyup="focusNextInput"
-                        />
-                        <input
-                            type="text"
-                            class="form-control w-1/6 mr-2"
-                            v-model="code4"
-                            maxlength="1"
-                            v-on:keyup="focusNextInput"
-                        />
-                        <input
-                            type="text"
-                            class="form-control w-1/6 mr-2"
-                            v-model="code5"
-                            maxlength="1"
-                            v-on:keyup="focusNextInput"
-                        />
-                        <input
-                            type="text"
-                            class="form-control w-1/6"
-                            v-model="code6"
-                            maxlength="1"
-                            v-on:keyup="focusNextInput"
-                        />
+        <div class="w-full flex place-content-center m-auto container h-screen min-h-200">
+            <div class="form text-left w-[500] m-auto">
+                <p class="info text-grey text-base">Hello There! 👋</p>
+                <h1 class="font-bold mb-8 text-md">Please enter the One-Time Password to verify your account</h1>
+                <form @submit.prevent="sendOTP" class="my-10">
+                    <div class="form-group flex flex-col">
+                        <!-- <label for="password" class="font-semibold mb-1">Password:</label> -->
+                        <!-- form group -->
+                        <div class="flex flex-col">
+                            <div class="flex">
+                            <input
+                                type="text"
+                                class="form-control w-1/6 mr-2"
+                                v-model="code1"
+                                maxlength="1"
+                                v-on:keyup="focusNextInput"
+                            />
+                            <input
+                                type="text"
+                                class="form-control w-1/6 mr-2"
+                                v-model="code2"
+                                maxlength="1"
+                                v-on:keyup="focusNextInput"
+                            />
+                            <input
+                                type="text"
+                                class="form-control w-1/6 mr-2"
+                                v-model="code3"
+                                maxlength="1"
+                                v-on:keyup="focusNextInput"
+                            />
+                            <input
+                                type="text"
+                                class="form-control w-1/6 mr-2"
+                                v-model="code4"
+                                maxlength="1"
+                                v-on:keyup="focusNextInput"
+                            />
+                            <input
+                                type="text"
+                                class="form-control w-1/6 mr-2"
+                                v-model="code5"
+                                maxlength="1"
+                                v-on:keyup="focusNextInput"
+                            />
+                            <input
+                                type="text"
+                                class="form-control w-1/6"
+                                v-model="code6"
+                                maxlength="1"
+                                v-on:keyup="focusNextInput"
+                            />
+                            </div>
                         </div>
+                        <button
+                        type="submit"
+                        class="btn bg-secondary w-full text-white font-bold"
+                        >
+                        Validate
+                        </button>
                     </div>
-                    <button
-                    type="submit"
-                    class="btn bg-secondary w-full text-white font-bold"
-                    >
-                    Validate
-                    </button>
-                </div>
-            </form>
+                </form>
             </div>
-        </div>
         </div>
     </div>
 </template>
@@ -145,7 +140,18 @@ name: "Home",
                 } catch {
                     // do nothing
                 }
-            } else {
+            }
+            // for mobile phones
+            else if (keyCode == 229) {
+                // 46 is dot
+                try {
+                    // add value to otp
+                    this.otp = this.code1 + this.code2 + this.code3 + this.code4 + this.code5 + this.code6;
+                    $event.target.nextElementSibling.focus();
+                } catch {
+                    // do nothing
+                }
+            }  else {
                 $event.target.value = "";
             }
         },

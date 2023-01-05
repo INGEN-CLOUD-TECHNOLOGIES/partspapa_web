@@ -1,5 +1,5 @@
 <template>
-  <div class="block md:hidden h-56 bg-secondary p-5">
+  <div class="block md:hidden h-28 bg-secondary p-5">
     <form action="" class="h-full w-full flex" @submit.prevent="searchItem">
         <input type="text" class="m-auto w-full p-2 rounded" v-model="search" placeholder="Part Number(s), Keywords, or VIN">
     </form>

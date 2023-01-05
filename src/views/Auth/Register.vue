@@ -1,15 +1,15 @@
 <template>
   <div class="">
     <div class="flex w-full">
-      <div class="left-panel hidden md:block relative">
+      <div class="left-panel hidden lg:block relative">
         <!-- <div class="cta-info">
           this is a test
         </div> -->
         <div class="img_overlay"></div>
         <img src="@/assets/img/hero2.png" class="res-img w-full" alt="" />
       </div>
-      <div class="w-full flex place-content-center m-auto p-[65px]">
-        <div class="form text-left w-[500]">
+      <div class="w-full flex place-content-center m-auto container h-screen min-h-200">
+        <div class="form text-left w-[500] my-auto">
           <p class="info text-grey text-base">Hello There! 👋</p>
           <h1 class="font-bold mb-8 text-md">Create an account</h1>
           <form @submit.prevent="register" class="my-10">

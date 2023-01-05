@@ -9,7 +9,7 @@
             <div class="thumbnail cursor-pointer mb-3" @click="getImageLink">
               <!-- <h1 class="text-white text-lg">1</h1> -->
               <img
-                :src="img"
+                :src="checkURL(product_detail.image)"
                 alt=""
               />
             </div>
@@ -17,7 +17,7 @@
         </div>
         <div class="product-image-container bg-secondary text-center">
           <!-- <h1 class="text-white text-lg">1</h1> -->
-          <img :src="featured_image" alt="" />
+          <img :src="checkURL(product_detail.image)" alt="" />
         </div>
       </div>
       <div class="product-info px-0 md:px-10 w-full py-5 md:py-0">
@@ -139,6 +139,16 @@ export default {
   },
 
   methods: {
+    checkURL(link) {
+      let url = "";
+      try{
+        url = link.split("/").slice(2).join("/");
+        return url;
+      } catch {
+        url = link;
+        return url;
+      }
+    },
 
     deactivateThumbnail() {
       let thumbnails = document.querySelectorAll(".thumbnail img");

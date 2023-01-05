@@ -145,6 +145,7 @@
 
 <script>
 import { getAPI } from "@/utils/apis/axios";
+import LocalStorageService from "@/utils/apis/token";
 
 export default {
     name: 'ProductUpload',
@@ -248,6 +249,7 @@ export default {
                 this.vendor_name = res.data.first_name + ' ' + res.data.last_name;
                 this.$store.state.user.user_info ? this.vendor = this.$store.state.user.user_info : this.vendor = '';
         } else {
+            LocalStorageService.clearToken();
             this.$router.push({ name: "Home" });
             this.$notification.error("Please Login to start selling.", { infiniteTimer: false, showCloseIcn: true });
         }
