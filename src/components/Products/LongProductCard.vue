@@ -1,13 +1,9 @@
 <template>
   <router-link tag="a" class="card bg-white hover:shadow-sm rounded flex cursor-pointer relative" :to="{ name: 'ProductDetails', params: { id: id, category_slug: category.slug } }">
     <div
-      class="img-col rounded-l"
-      :style="`
-                background: url(../../../assets/img/prod.png));
-                    no-repeat center center;
-                `"
+      class="img-col rounded-l prod_img"
+      :style="`background-image: url(${checkURL(img)});`"
     >
-      <!-- <img src="@/assets/img/prod.png" class="w-full h-full rounded-l-md" alt=""> -->
     </div>
     <div class="card-content px-4 py-4 text-left">
       <div class="card-head flex">
@@ -58,6 +54,17 @@ export default {
     saveProduct() {
       console.log("save");
     },
+
+    checkURL(link) {
+      let url = "";
+      try{
+        url = link.split("/").slice(2).join("/");
+        return url;
+      } catch {
+        url = link;
+        return url;
+      }
+    },
   },
 };
 </script>
@@ -77,4 +84,20 @@ export default {
 .card-content {
   flex: 1;
 }
+
+.prod_img{
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.desc {
+  height: 33px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 </style>

@@ -14,6 +14,7 @@
               :description="prod.description"
               :price="prod.price"
               :category="prod.category"
+              :img="prod.image"
             />
           </div>
         </div>

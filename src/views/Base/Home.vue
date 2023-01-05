@@ -252,6 +252,7 @@
               :price="prod.price"
               :category="prod.category"
               :vendor="prod.vendor"
+              :img="prod.image"
             />
         </div>
       </div>
