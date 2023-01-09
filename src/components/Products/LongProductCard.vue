@@ -2,7 +2,7 @@
   <router-link tag="a" class="card bg-white hover:shadow-sm rounded flex cursor-pointer relative" :to="{ name: 'ProductDetails', params: { id: id, category_slug: category.slug } }">
     <div
       class="img-col rounded-l prod_img"
-      :style="`background-image: url(${checkURL(img)});`"
+      :style="`background-image: url(https://res.cloudinary.com/ingen-cloud/${img});`"
     >
     </div>
     <div class="card-content px-4 py-4 text-left">

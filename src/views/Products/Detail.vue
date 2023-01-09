@@ -6,18 +6,18 @@
       <div class="product-image flex">
         <div class="hidden md:flex thumbnails flex-col mr-2">
           <div v-for="img in image_links" :key="img.id">
-            <div class="thumbnail cursor-pointer mb-3" @click="getImageLink">
+            <div class="thumbnail cursor-pointer mb-3" @click="getImageIndex(image_links.indexOf(img))">
               <!-- <h1 class="text-white text-lg">1</h1> -->
               <img
-                :src="checkURL(product_detail.image)"
+                v-if="img"
+                :src="`https://res.cloudinary.com/ingen-cloud/${img}`"
                 alt=""
               />
             </div>
           </div>
         </div>
         <div class="product-image-container bg-secondary text-center">
-          <!-- <h1 class="text-white text-lg">1</h1> -->
-          <img :src="checkURL(product_detail.image)" alt="" />
+          <img v-if="featured_image" :src="`https://res.cloudinary.com/ingen-cloud/${featured_image}`" alt="" />
         </div>
       </div>
       <div class="product-info px-0 md:px-10 w-full py-5 md:py-0">
@@ -76,6 +76,7 @@
                 :price="prod.price"
                 :category="prod.category"
                 :vendor="prod.vendor"
+                :img="prod.image"
               />
           </div>
         </div>
@@ -113,13 +114,7 @@ export default {
       product_detail: {},
       similar_products: [],
       showloader: true,
-      image_links: [
-        'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2138&q=80',
-        'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FyJTIwcGFydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
-        // 'https://images.unsplash.com/photo-1429772011165-0c2e054367b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-        // 'https://images.unsplash.com/photo-1578844251758-2f71da64c96f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FyJTIwcGFydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
-        // 'https://images.unsplash.com/photo-1527383418406-f85a3b146499?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Y2FyJTIwcGFydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
-      ],
+      image_links: [],
     };
   },
   components: {
@@ -171,6 +166,13 @@ export default {
       this.activateThumbnail(img_tag); // add active class to clicked thumbnail
     },
 
+    getImageIndex(e){
+      let index = e
+      this.featured_image = this.image_links[index]
+      // this.deactivateThumbnail(); // remove active class from all thumbnails
+      // this.activateThumbnail(img_tag); // add active class to clicked thumbnail
+    },
+
 
     getProductDetail() {
       const prod_id = this.$route.params.id;
@@ -180,13 +182,44 @@ export default {
         .then((res) => {
           this.product_detail = res.data.product;
           this.similar_products = res.data.similar_products;
+          this.featured_image = res.data.image;
+          this.image_links = this.getLinks(res.data.product);
           this.showloader = false;
           window.scrollTo(0, 0)
-        });
+        })
+    },
+
+    // append image to image links
+    appendImageLink(data) {
+      this.image_links.push(data);
+    },
+    
+    getLinks(data) {
+      let links = [];
+      let product = data
+      let keys = Object.keys(product);
+      console.log(keys)
+      keys.forEach((key) => {
+        if (key.includes("alt_img") || key == "image") {
+          let link = product[key];
+          if (link) {
+            links.push(link);
+          }
+        }
+      });
+      console.log(links);
+      return links;
     },
   },
   created() {
     this.getProductDetail();
+    // this.featured_image = this.product_detail.image
+    // this.image_links = this.getLinks(this.product_detail);
+    // async
+    // this.getProductDetail().then(() => {
+    //   this.featured_image = this.product_detail.image;
+    //   this.image_links = this.getLinks(this.product_detail);
+    // });
   },
 };
 </script>
